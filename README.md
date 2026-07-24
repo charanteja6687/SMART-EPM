@@ -10,29 +10,43 @@ This application helps organizations manage employees, projects, and daily tasks
 
 The application includes secure JWT authentication, email OTP-based password reset, dark mode, dashboard analytics, notifications, reporting, and activity tracking.
 
----
 
 ## Screenshots
 
-### Key app screens
+- Admin dashboard:
+	![Admin dashboard](docs/images/Admin_dashboard.jpg)
 
-![Login Page](docs/images/Loginpage.jpg)
+- Admin - Employees:
+	![Admin Employees](docs/images/Adminview_Employee.jpg)
 
-![Register Page](docs/images/Registerpage.jpg)
+- Admin - Projects:
+	![Admin Projects](docs/images/Adminview_Projects.jpg)
 
-![Dashboard Page](docs/images/Dashboardpage.jpg)
+- Admin - Tasks:
+	![Admin Tasks](docs/images/Adminview_Tasks.jpg)
 
-![Employees Page](docs/images/Employeepage.jpg)
+- Admin - Reports:
+	![Admin Reports](docs/images/Adminview_Reports.jpg)
 
-![Projects Page](docs/images/Projectspage.jpg)
+- Activity Log:
+	![Activity Log](docs/images/Adminview_Auditlogs.jpg)
 
-![Tasks Page](docs/images/Taskpage.jpg)
+- Employee view:
+	![Employee view](docs/images/Employeeview.jpg)
 
-![Reports Page](docs/images/Reportspage.jpg)
+- Login portal:
+	![Login Portal](docs/images/login_portal.jpg)
 
-![Activity Log Page](docs/images/Activitylogpage.jpg)
+- Signup portal:
+	![Signup Portal](docs/images/Signup_portal.jpg)
 
----
+- Architecture flowchart:
+	![Architecture flowchart](docs/images/Architecture_flowchart.jpeg)
+
+- Database ER diagram:
+	![Database ER diagram](docs/images/Database_ER_diagram.jpeg)
+
+
 
 ## Features
 
@@ -235,6 +249,41 @@ spring.mail.password=your-app-password
 ⚠️ Do not upload real credentials to GitHub.
 ```
 \docs\images\Activitylogpage.jpg
+## Screenshots
+
+- Admin dashboard:
+	![Admin dashboard](docs/images/Admin_dashboard.jpg)
+
+- Admin - Employees:
+	![Admin Employees](docs/images/Adminview_Employee.jpg)
+
+- Admin - Projects:
+	![Admin Projects](docs/images/Adminview_Projects.jpg)
+
+- Admin - Tasks:
+	![Admin Tasks](docs/images/Adminview_Tasks.jpg)
+
+- Admin - Reports:
+	![Admin Reports](docs/images/Adminview_Reports.jpg)
+
+- Activity Log:
+	![Activity Log](docs/images/Adminview_Auditlogs.jpg)
+
+- Employee view:
+	![Employee view](docs/images/Employeeview.jpg)
+
+- Login portal:
+	![Login Portal](docs/images/login_portal.jpg)
+
+- Signup portal:
+	![Signup Portal](docs/images/Signup_portal.jpg)
+
+- Architecture flowchart:
+	![Architecture flowchart](docs/images/Architecture_flowchart.jpeg)
+
+- Database ER diagram:
+	![Database ER diagram](docs/images/Database_ER_diagram.jpeg)
+
 ### Configure Email
 
 Add your email credentials.
