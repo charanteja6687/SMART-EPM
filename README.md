@@ -215,7 +215,7 @@ project/
 
 ### Prerequisites
 Before running the project, make sure the following are installed:
-* **Java**: 17 or later
+* **Java**: 25
 * **Maven**: 3.8+
 * **Node.js**: 18+
 * **npm**
@@ -328,171 +328,172 @@ Interactive REST API documentation is available via Swagger UI:
 * **Swagger UI**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 * Additional documentation is available inside the `docs` folder.
 
+
+
+# Smart Employee & Project Management System - Technical & Workflow Documentation
+
+This technical reference manual provides end-to-end operational flowcharts, database initialization scripts, and Postman API testing guides for the **Smart Employee & Project Management System**.
+
 ---
 
 ## Technical Flowcharts & System Diagrams
 
-### Authentication & Security Flowchart
+### 1. Authentication & Security Flowchart
 Visualizes the stateless JWT login lifecycle, password hashing via BCrypt, token validation filter, and Email OTP password reset flow.
 
 ```mermaid
 flowchart TD
-    Start([User Initiates Request]) --> Choice{Select Flow}
+    Start(["User Initiates Request"]) --> Choice{"Select Flow"}
     
-    %% LOGIN & JWT FLOW
-    Choice -- Login --> SubmitCredentials[Submit Username & Password]
-    SubmitCredentials --> AuthController[POST /api/auth/login]
-    AuthController --> AuthManager[Spring Security AuthenticationManager]
-    AuthManager --> UserDetailsService[Load UserDetails from DB]
-    UserDetailsService --> BCryptCheck{BCrypt Password Match?}
-    BCryptCheck -- No --> AuthError[Return 401 Unauthorized]
-    BCryptCheck -- Yes --> JwtGenerate[Generate Signed JWT Token]
-    JwtGenerate --> ReturnToken[Return JWT in JSON Response]
+    Choice -->|Login| SubmitCredentials["Submit Username & Password"]
+    SubmitCredentials --> AuthController["POST /api/auth/login"]
+    AuthController --> AuthManager["Spring Security AuthenticationManager"]
+    AuthManager --> UserDetailsService["Load UserDetails from DB"]
+    UserDetailsService --> BCryptCheck{"BCrypt Password Match?"}
+    BCryptCheck -->|No| AuthError["Return 401 Unauthorized"]
+    BCryptCheck -->|Yes| JwtGenerate["Generate Signed JWT Token"]
+    JwtGenerate --> ReturnToken["Return JWT in JSON Response"]
     
-    %% OTP FORGOT PASSWORD FLOW
-    Choice -- Forgot Password --> SubmitEmail[Submit Registered Email]
-    SubmitEmail --> ForgotController[POST /api/auth/forgot-password]
-    ForgotController --> OtpService[Generate 6-Digit OTP & Save Token]
-    OtpService --> SMTP[Spring Mail JavaMailSender]
-    SMTP --> DispatchEmail[Send Email OTP to User]
-    DispatchEmail --> VerifyOTP[User Inputs OTP]
-    VerifyOTP --> VerifyController[POST /api/auth/verify-otp]
-    VerifyController --> OTPCheck{OTP Valid & Not Expired?}
-    OTPCheck -- No --> OTPError[Return 400 Bad Request]
-    OTPCheck -- Yes --> ResetPass[User Inputs New Password]
-    ResetPass --> ResetController[POST /api/auth/reset-password]
-    ResetController --> UpdateDB[Encrypt & Update Password in DB]
-    UpdateDB --> Success([Password Reset Successful])
+    Choice -->|Forgot Password| SubmitEmail["Submit Registered Email"]
+    SubmitEmail --> ForgotController["POST /api/auth/forgot-password"]
+    ForgotController --> OtpService["Generate 6-Digit OTP & Save Token"]
+    OtpService --> SMTP["Spring Mail JavaMailSender"]
+    SMTP --> DispatchEmail["Send Email OTP to User"]
+    DispatchEmail --> VerifyOTP["User Inputs OTP"]
+    VerifyOTP --> VerifyController["POST /api/auth/verify-otp"]
+    VerifyController --> OTPCheck{"OTP Valid & Not Expired?"}
+    OTPCheck -->|No| OTPError["Return 400 Bad Request"]
+    OTPCheck -->|Yes| ResetPass["User Inputs New Password"]
+    ResetPass --> ResetController["POST /api/auth/reset-password"]
+    ResetController --> UpdateDB["Encrypt & Update Password in DB"]
+    UpdateDB --> Success(["Password Reset Successful"])
 ```
 
 ---
 
-### Employee Management Flowchart
+### 2. Employee Management Flowchart
 Illustrates the employee record creation, search/sorting, soft deletion, and restoration workflow.
 
 ```mermaid
 flowchart TD
-    Admin([Admin / User]) --> ReqChoice{Action Type}
+    Admin(["Admin / User"]) --> ReqChoice{"Action Type"}
     
-    %% CREATE & LINK EMPLOYEE
-    ReqChoice -- Register / Create --> CreateEmp[Submit Employee Details]
-    CreateEmp --> EmpController[POST /api/employees]
-    EmpController --> RoleGuard1{Role == ADMIN?}
-    RoleGuard1 -- No --> Deny1[430 Forbidden]
-    RoleGuard1 -- Yes --> SaveEmp[Save Employee Record in MySQL]
-    SaveEmp --> AutoLink[Auto-Link User Account by Email]
+    ReqChoice -->|Register / Create| CreateEmp["Submit Employee Details"]
+    CreateEmp --> EmpController["POST /api/employees"]
+    EmpController --> RoleGuard1{"Role == ADMIN?"}
+    RoleGuard1 -->|No| Deny1["403 Forbidden"]
+    RoleGuard1 -->|Yes| SaveEmp["Save Employee Record in MySQL"]
+    SaveEmp --> AutoLink["Auto-Link User Account by Email"]
     
-    %% SEARCH & PAGINATION
-    ReqChoice -- View / Search --> FetchEmp[GET /api/employees]
-    FetchEmp --> ParseParams[Parse search, dept, sort, page]
-    ParseParams --> QueryDB[Execute JPA Spec / Query]
-    QueryDB --> ReturnList[Return Paginated Employee List]
+    ReqChoice -->|View / Search| FetchEmp["GET /api/employees"]
+    FetchEmp --> ParseParams["Parse search, dept, sort, page"]
+    ParseParams --> QueryDB["Execute JPA Spec / Query"]
+    QueryDB --> ReturnList["Return Paginated Employee List"]
     
-    %% SOFT DELETE & RESTORE
-    ReqChoice -- Soft Delete --> DeleteEmp[DELETE /api/employees/{id}]
-    DeleteEmp --> FlagDeleted[Set deleted = true in DB]
+    ReqChoice -->|Soft Delete| DeleteEmp["DELETE /api/employees/{id}"]
+    DeleteEmp --> FlagDeleted["Set deleted = true in DB"]
     
-    ReqChoice -- Restore --> RestoreEmp[PUT /api/employees/{id}/restore]
-    RestoreEmp --> FlagActive[Set deleted = false in DB]
-    FlagActive --> LogAudit[Log Action in Activity Logs]
+    ReqChoice -->|Restore| RestoreEmp["PUT /api/employees/{id}/restore"]
+    RestoreEmp --> FlagActive["Set deleted = false in DB"]
+    FlagActive --> LogAudit["Log Action in Activity Logs"]
 ```
 
 ---
 
-### Project Management Flowchart
+### 3. Project Management Flowchart
 Shows project creation, Many-to-Many employee team assignment, and automatic progress percentage updates.
 
 ```mermaid
 flowchart TD
-    Admin([Admin]) --> ProjectAction[Project Action]
+    Admin(["Admin"]) --> ProjectAction["Project Action"]
     
-    ProjectAction -- Create Project --> InputProject[Input Title, Dates, Priority]
-    InputProject --> SelectTeam[Select Employee IDs for Team]
-    SelectTeam --> PostProject[POST /api/projects]
-    PostProject --> ValidateDates{Start Date < End Date?}
-    ValidateDates -- No --> DateError[Return 400 Bad Request]
-    ValidateDates -- Yes --> SaveProject[Persist Project & Team Links]
+    ProjectAction -->|Create Project| InputProject["Input Title, Dates, Priority"]
+    InputProject --> SelectTeam["Select Employee IDs for Team"]
+    SelectTeam --> PostProject["POST /api/projects"]
+    PostProject --> ValidateDates{"Start Date < End Date?"}
+    ValidateDates -->|No| DateError["Return 400 Bad Request"]
+    ValidateDates -->|Yes| SaveProject["Persist Project & Team Links"]
     
-    ProjectAction -- Task Change Event --> TaskUpdateNotification[Associated Task Status Change]
-    TaskUpdateNotification --> Recalculate[Recalculate Completed vs Total Tasks]
-    Recalculate --> ComputeProgress[Progress % = Completed / Total * 100]
-    ComputeProgress --> UpdateProjectDB[Update project.progress in MySQL]
-    UpdateProjectDB --> EmitEvent[Notify Admin Dashboard]
+    ProjectAction -->|Task Change Event| TaskUpdateNotification["Associated Task Status Change"]
+    TaskUpdateNotification --> Recalculate["Recalculate Completed vs Total Tasks"]
+    Recalculate --> ComputeProgress["Progress % = Completed / Total * 100"]
+    ComputeProgress --> UpdateProjectDB["Update project.progress in MySQL"]
+    UpdateProjectDB --> EmitEvent["Notify Admin Dashboard"]
 ```
 
 ---
 
-### Task Management & Progress Flowchart
+### 4. Task Management & Progress Flowchart
 Maps out task assignment to team members, employee status updates with remarks, and soft delete restoration.
 
 ```mermaid
 flowchart TD
-    Admin([Admin]) --> AssignTask[POST /api/tasks]
-    AssignTask --> VerifyAssignment{Assigned Employee in Project Team?}
-    VerifyAssignment -- No --> TeamError[Return 400 Bad Request]
-    VerifyAssignment -- Yes --> SaveTask[Create Task Record in MySQL]
-    SaveTask --> NotifyEmp[Send Notification to Assigned Employee]
+    Admin(["Admin"]) --> AssignTask["POST /api/tasks"]
+    AssignTask --> VerifyAssignment{"Assigned Employee in Project Team?"}
+    VerifyAssignment -->|No| TeamError["Return 400 Bad Request"]
+    VerifyAssignment -->|Yes| SaveTask["Create Task Record in MySQL"]
+    SaveTask --> NotifyEmp["Send Notification to Assigned Employee"]
     
-    NotifyEmp --> Emp([Assigned Employee])
-    Emp --> ViewTask[GET /api/tasks/my-tasks]
-    ViewTask --> UpdateStatus[PUT /api/tasks/{id}]
-    UpdateStatus --> InputRemarks[Update Status PENDING -> IN_PROGRESS -> COMPLETED & Append Remarks]
-    InputRemarks --> SaveStatus[Persist Task Progress & Remarks]
-    SaveStatus --> TriggerProjectRecalc[Trigger Project Progress Recalculation]
+    NotifyEmp --> Emp(["Assigned Employee"])
+    Emp --> ViewTask["GET /api/tasks/my-tasks"]
+    ViewTask --> UpdateStatus["PUT /api/tasks/{id}"]
+    UpdateStatus --> InputRemarks["Update Status PENDING -> IN_PROGRESS -> COMPLETED & Append Remarks"]
+    InputRemarks --> SaveStatus["Persist Task Progress & Remarks"]
+    SaveStatus --> TriggerProjectRecalc["Trigger Project Progress Recalculation"]
 ```
 
 ---
 
-### API Request Lifecycle & Error Handling Flowchart
+### 5. API Request Lifecycle & Error Handling Flowchart
 Demonstrates incoming REST API request validation, JWT header filter checks, service layer processing, transaction boundaries, and global exception handling.
 
 ```mermaid
 flowchart TD
-    Client([HTTP Client / Axios]) --> SendReq[Send HTTP Request]
-    SendReq --> JwtFilter[JwtAuthFilter Interceptor]
+    Client(["HTTP Client / Axios"]) --> SendReq["Send HTTP Request"]
+    SendReq --> JwtFilter["JwtAuthFilter Interceptor"]
     
-    JwtFilter --> CheckHeader{Has Authorization: Bearer JWT?}
-    CheckHeader -- No / Public Endpoint --> PassToController[Pass to Controller]
-    CheckHeader -- Yes --> ValidateJWT{JWT Signature Valid?}
-    ValidateJWT -- Invalid / Expired --> 401Err[Return 401 Unauthorized]
-    ValidateJWT -- Valid --> SetSecurityContext[Set SecurityContext Authentication]
+    JwtFilter --> CheckHeader{"Has Authorization: Bearer JWT?"}
+    CheckHeader -->|No / Public Endpoint| PassToController["Pass to Controller"]
+    CheckHeader -->|Yes| ValidateJWT{"JWT Signature Valid?"}
+    ValidateJWT -->|Invalid / Expired| Err401["Return 401 Unauthorized"]
+    ValidateJWT -->|Valid| SetSecurityContext["Set SecurityContext Authentication"]
     SetSecurityContext --> PassToController
     
-    PassToController --> PreAuth{Has @PreAuthorize Role?}
-    PreAuth -- Denied --> 403Err[Return 403 Forbidden]
-    PreAuth -- Allowed --> ExecService[Execute Service Method @Transactional]
+    PassToController --> PreAuth{"Has @PreAuthorize Role?"}
+    PreAuth -->|Denied| Err403["Return 403 Forbidden"]
+    PreAuth -->|Allowed| ExecService["Execute Service Method @Transactional"]
     
-    ExecService --> CheckErr{Exception Thrown?}
-    CheckErr -- Yes --> GlobalHandler[GlobalExceptionHandler ControllerAdvice]
-    GlobalHandler --> StandardErrResponse[Return JSON Error Response with Timestamp & Message]
-    CheckErr -- No --> CommitTx[Commit DB Transaction]
-    CommitTx --> 200OK[Return 200 OK / 201 Created JSON]
+    ExecService --> CheckErr{"Exception Thrown?"}
+    CheckErr -->|Yes| GlobalHandler["GlobalExceptionHandler ControllerAdvice"]
+    GlobalHandler --> StandardErrResponse["Return JSON Error Response with Timestamp & Message"]
+    CheckErr -->|No| CommitTx["Commit DB Transaction"]
+    CommitTx --> OK200["Return 200 OK / 201 Created JSON"]
 ```
 
 ---
 
-### Database Persistence & Event Flowchart
+### 6. Database Persistence & Event Flowchart
 Visualizes data interaction between Hibernate JPA, MySQL relational tables, audit trail triggers, and notification records.
 
 ```mermaid
 flowchart TD
-    ServiceLayer[Spring Boot Service Layer] --> JPA[Spring Data JPA Repositories]
+    ServiceLayer["Spring Boot Service Layer"] --> JPA["Spring Data JPA Repositories"]
     
-    JPA --> TxBoundary[@Transactional Boundary]
-    TxBoundary --> WriteUser[Users Table CRUD]
-    TxBoundary --> WriteEmp[Employees Table CRUD]
-    TxBoundary --> WriteProj[Projects Table CRUD]
-    TxBoundary --> WriteTask[Tasks Table CRUD]
+    JPA --> TxBoundary["@Transactional Boundary"]
+    TxBoundary --> WriteUser["Users Table CRUD"]
+    TxBoundary --> WriteEmp["Employees Table CRUD"]
+    TxBoundary --> WriteProj["Projects Table CRUD"]
+    TxBoundary --> WriteTask["Tasks Table CRUD"]
     
-    WriteTask --> AuditTrigger[Create Audit Log Record]
-    AuditTrigger --> WriteLog[Insert into activity_logs]
+    WriteTask --> AuditTrigger["Create Audit Log Record"]
+    AuditTrigger --> WriteLog["Insert into activity_logs"]
     
-    WriteTask --> NotifyTrigger[Create Notification Record]
-    NotifyTrigger --> WriteNotification[Insert into notifications]
+    WriteTask --> NotifyTrigger["Create Notification Record"]
+    NotifyTrigger --> WriteNotification["Insert into notifications"]
     
-    WriteLog --> Flush[Flush Transaction to MySQL Database]
+    WriteLog --> Flush["Flush Transaction to MySQL Database"]
     WriteNotification --> Flush
-    Flush --> SuccessDB[(MySQL 8 Database Persisted)]
+    Flush --> SuccessDB[("MySQL 8 Database Persisted")]
 ```
 
 ---
@@ -660,12 +661,12 @@ A pre-configured Postman collection is provided in the repository to test and ve
 
 * **Collection File Location**: `postman/Smart-EPM.postman_collection.json`
 
-### Import Collection
+### 1. Import Collection
 1. Open **Postman**.
 2. Click **Import** in the top left corner.
 3. Select `postman/Smart-EPM.postman_collection.json`.
 
-### Configure Collection Environment Variables
+### 2. Configure Collection Environment Variables
 Set the following environment or collection variables in Postman:
 
 | Variable Name | Initial Value | Current Value | Description |
@@ -687,10 +688,13 @@ if (pm.response.code === 200) {
 }
 ```
 
-### Executing Protected Requests
+### 4. Executing Protected Requests
 All subsequent requests in the collection (*Employees, Projects, Tasks, Reports, Activity Logs*) automatically include the following header:
 
 ```text
 Authorization: Bearer {{token}}
 ```
+
+
+---
 
