@@ -30,47 +30,47 @@ The application includes secure JWT authentication, email OTP-based password res
 
 - Admin dashboard:
 	![Admin dashboard](docs/images/Admin_dashboard.jpg)
-    Fig 1: Admin Dashboard & Analytics Overview
+          Fig 1: Admin Dashboard & Analytics Overview
 
 - Admin - Employees:
 	![Admin Employees](docs/images/Adminview_Employee.jpg)
-    Fig 2: Employee Management Interface
+          Fig 2: Employee Management Interface
 
 - Admin - Projects:
 	![Admin Projects](docs/images/Adminview_Projects.jpg)
-    Fig 3: Project Management & Dynamic Progress Tracking
+          Fig 3: Project Management & Dynamic Progress Tracking
 
 - Admin - Tasks:
 	![Admin Tasks](docs/images/Adminview_Tasks.jpg)
-    Fig 4: Task Allocation & Progress Tracking Interface
+          Fig 4: Task Allocation & Progress Tracking Interface
     
 - Admin - Reports:
 	![Admin Reports](docs/images/Adminview_Reports.jpg)
-    Fig 5: Operational Reports & Multi-Format Download Center
+          Fig 5: Operational Reports & Multi-Format Download Center
 
 - Activity Log:
 	![Activity Log](docs/images/Adminview_Auditlogs.jpg)
-    Fig 6: System Activity Log & Audit Trail
+          Fig 6: System Activity Log & Audit Trail
 
 - Employee view:
 	![Employee view](docs/images/Employeeview.jpg)
-    Fig 7: Employee Personal Workspace & Dashboard
+          Fig 7: Employee Personal Workspace & Dashboard
 
 - Login portal:
 	![Login Portal](docs/images/login_portal.jpg)
-    Fig 9: User Login & Authentication Portal
+          Fig 9: User Login & Authentication Portal
 
 - Signup portal:
 	![Signup Portal](docs/images/Signup_portal.jpg)
-    Fig 10: Account Registration & Role Selection Portal
+          Fig 10: Account Registration & Role Selection Portal
 
 - Architecture flowchart:
 	![Architecture flowchart](docs/images/Architecture_flowchart.jpeg)
-    Fig 11: High-Level System Architecture Diagram
+          Fig 11: High-Level System Architecture Diagram
 
 - Database ER diagram:
 	![Database ER diagram](docs/images/Database_ER_diagram.jpeg)
-    Fig 12: Database Entity-Relationship (ER) Diagram
+          Fig 12: Database Entity-Relationship (ER) Diagram
 
 ### Authentication & Security
 
