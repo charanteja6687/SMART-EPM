@@ -72,44 +72,6 @@ The application includes secure JWT authentication, email OTP-based password res
 	![Database ER diagram](docs/images/Database_ER_diagram.jpeg)
           Fig 12: Database Entity-Relationship (ER) Diagram
 
-### Authentication & Security
-
-* [x] **JWT-based Login and Registration**: Stateless authentication with JWT tokens.
-* [x] **BCrypt Password Encryption**: Secure password hashing before persistence.
-* [x] **Role-based Authorization**: Fine-grained access control for ADMIN and EMPLOYEE roles.
-* [x] **OTP-based Forgot Password**: Email OTP generation and verification flow using JavaMailSender.
-* [x] **Global Exception Handling**: Structured REST exception responses across endpoints.
-* [x] **Input Validation**: Payload validation and constraint checks.
-
-### Employee Management
-
-* [x] **Employee Operations**: Create, update, delete, and restore employees.
-* [x] **Search, Sorting & Pagination**: Query handling across employee lists.
-* [x] **Automatic Account Linking**: Automatic Employee creation/linking during user registration using email.
-* [x] **Soft Delete Support**: Flag-based deletion with restore functionality.
-
-### Project Management
-
-* [x] **Project Operations**: Create and manage project lifecycles.
-* [x] **Team Assignment**: Assign employees to projects.
-* [x] **Status & Priority**: Track project progress, status, and priority levels.
-* [x] **Deadline Tracking**: Start and end date management.
-* [x] **Automatic Progress Calculation**: Project progress automatically updated based on completed tasks.
-* [x] **Soft Delete & Restore**: Soft delete support with restoration.
-
-### Task Management
-
-* [x] **Task Operations**: Create, assign, and manage daily tasks.
-* [x] **Progress & Status Updates**: Track task progress, status transitions, and add remarks.
-* [x] **Soft Delete & Restore**: Recover soft-deleted tasks.
-* [x] **Automatic Notifications**: Task notifications generated on assignment/updates.
-
-### Dashboards & User Interface
-
-* [x] **Admin Dashboard Counters**: Total Employees, Total Projects, Total Tasks, Active Projects, Completed Projects, Pending Tasks, Completed Tasks.
-* [x] **Employee Dashboard**: Assigned Tasks, Completed Tasks, Upcoming Deadlines, Personal task overview.
-* [x] **Additional Features**: In-app notifications with unread badge, Activity Log (Admin only), Dark Mode (stored in LocalStorage), Swagger API Documentation, Excel & PDF Reports (Apache POI & iText7), Responsive UI, Toast Notifications, Loading states, and error handling.
-
 
 ## Features
 
