@@ -100,159 +100,19 @@ The application includes secure JWT authentication, email OTP-based password res
 * [x] **Additional Features**: In-app notifications with unread badge, Activity Log (Admin only), Dark Mode (stored in LocalStorage), Swagger API Documentation, Excel & PDF Reports (Apache POI & iText7), Responsive UI, Toast Notifications, Loading states, and error handling.
 
 
-## 4. Role-Based Access Control (RBAC) Matrix
-|
- Feature / Permission 
-|
- Admin (
-`ADMIN`
-) 
-|
- Employee (
-`EMPLOYEE`
-) 
-|
- Server-Side Guard 
-|
-|
-:---
-|
-:---:
-|
-:---:
-|
-:---:
-|
-|
-**
-Manage Employees (Create, Update, Delete)
-**
-|
- ✅ 
-|
- ❌ 
-|
- Server-enforced role check 
-|
-|
-**
-Restore Deleted Records
-**
-|
- ✅ 
-|
- ❌ 
-|
- Server-enforced role check 
-|
-|
-**
-Manage Projects & Assign Teams
-**
-|
- ✅ 
-|
- ❌ 
-|
- Server-enforced role check 
-|
-|
-**
-Create & Assign Tasks
-**
-|
- ✅ 
-|
- ❌ 
-|
- Server-enforced role check 
-|
-|
-**
-View Activity Logs
-**
-|
- ✅ 
-|
- ❌ 
-|
- Server-enforced role check 
-|
-|
-**
-View Reports (Excel / PDF)
-**
-|
- ✅ 
-|
- ❌ 
-|
- Server-enforced role check 
-|
-|
-**
-View Assigned Projects
-**
-|
- ✅ 
-|
- ✅ 
-*
-(Assigned Only)
-*
-|
- Server-enforced filtering 
-|
-|
-**
-View Assigned Tasks
-**
-|
- ✅ 
-|
- ✅ 
-*
-(Assigned Only)
-*
-|
- Server-enforced filtering 
-|
-|
-**
-Update Task Progress & Remarks
-**
-|
- ✅ 
-|
- ✅ 
-|
- Server-enforced ownership 
-|
-|
-**
-View Personal Dashboard
-**
-|
- ✅ 
-|
- ✅ 
-|
- Server-enforced role check 
-|
-|
-**
-Reset Password (OTP)
-**
-|
- ✅ 
-|
- ✅ 
-|
- Public / Authenticated 
-|
-> **Note**: The backend strictly enforces role-based access. Employees can only access data assigned to them. This restriction is implemented server-side and cannot be bypassed from the frontend.
----
-
+Role-Based Access Control (RBAC) Matrix
+Feature / Permission	Admin (ADMIN)	Employee (EMPLOYEE)	Server-Side Guard
+Manage Employees (Create, Update, Delete)	✅	❌	Server-enforced role check
+Restore Deleted Records	✅	❌	Server-enforced role check
+Manage Projects & Assign Teams	✅	❌	Server-enforced role check
+Create & Assign Tasks	✅	❌	Server-enforced role check
+View Activity Logs	✅	❌	Server-enforced role check
+View Reports (Excel / PDF)	✅	❌	Server-enforced role check
+View Assigned Projects	✅	✅ (Assigned Only)	Server-enforced filtering
+View Assigned Tasks	✅	✅ (Assigned Only)	Server-enforced filtering
+Update Task Progress & Remarks	✅	✅	Server-enforced ownership
+View Personal Dashboard	✅	✅	Server-enforced role check
+Reset Password (OTP)	✅	✅	Public / Authenticated
 
 ## Project Structure
 
