@@ -10,6 +10,21 @@ This application helps organizations manage employees, projects, and daily tasks
 
 The application includes secure JWT authentication, email OTP-based password reset, dark mode, dashboard analytics, notifications, reporting, and activity tracking.
 
+## Tech Stack
+
+| Layer | Technology / Library | Purpose |
+|-------|----------------------|---------|
+| Frontend Framework | React 18 | Builds the Single Page Application (SPA) user interface |
+| UI & Styling | Material UI (MUI), Emotion | Responsive UI components with dark/light theme support |
+| Routing & API Communication | React Router v6, Axios | Client-side routing and REST API communication with JWT authentication |
+| Backend Framework | Java 17, Spring Boot 3.2 | RESTful backend application framework |
+| Security & Authentication | Spring Security, JWT | Secure authentication and Role-Based Access Control (RBAC) |
+| Persistence & ORM | Spring Data JPA, Hibernate | Database interaction and object-relational mapping |
+| Database | MySQL 8 | Relational database management system |
+| Email Service | Spring Mail (JavaMailSender) | OTP-based password reset and email notifications |
+| Reports | Apache POI, iText7 | Excel and PDF report generation |
+| API Documentation | Springdoc OpenAPI (Swagger UI) | Interactive REST API documentation and testing |
+| Build Tools | Maven, npm | Dependency management, build automation, and package management |
 
 ## Screenshots
 
@@ -139,21 +154,6 @@ The application includes secure JWT authentication, email OTP-based password res
 - Reset Password
 
 The backend strictly enforces role-based access. Employees can only access data assigned to them. This restriction is implemented server-side and cannot be bypassed from the frontend.
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|------------|
-| Frontend | React 18, React Router 6, Material UI, Axios |
-| Backend | Java 17, Spring Boot 3.2, Spring Security, Spring Data JPA |
-| Database | MySQL 8 |
-| Authentication | JWT |
-| Email | Spring Mail (JavaMailSender) |
-| Reports | Apache POI, iText7 |
-| API Documentation | Swagger UI (springdoc-openapi) |
-| Build Tools | Maven, npm |
 
 ---
 
