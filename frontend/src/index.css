@@ -1,0 +1,15 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  background-color: #f4f6f8;
+}
+.page-container {
+  padding: 24px;
+}
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
