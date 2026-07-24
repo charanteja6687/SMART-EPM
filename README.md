@@ -30,6 +30,7 @@ The application includes secure JWT authentication, email OTP-based password res
 
 - Admin dashboard:
 	![Admin dashboard](docs/images/Admin_dashboard.jpg)
+    Figure 1: Admin Dashboard & Analytics Overview
 
 - Admin - Employees:
 	![Admin Employees](docs/images/Adminview_Employee.jpg)
