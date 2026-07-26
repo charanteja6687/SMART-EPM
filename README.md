@@ -58,19 +58,19 @@ The application includes secure JWT authentication, email OTP-based password res
 
 - Login portal:
 	![Login Portal](docs/images/login_portal.jpg)
-          Fig 9: User Login & Authentication Portal
+          Fig 8: User Login & Authentication Portal
 
 - Signup portal:
 	![Signup Portal](docs/images/Signup_portal.jpg)
-          Fig 10: Account Registration & Role Selection Portal
+          Fig 9: Account Registration & Role Selection Portal
 
 - Architecture flowchart:
 	![Architecture flowchart](docs/images/Architecture_flowchart.jpeg)
-          Fig 11: High-Level System Architecture Diagram
+          Fig 10: High-Level System Architecture Diagram
 
 - Database ER diagram:
 	![Database ER diagram](docs/images/Database_ER_diagram.jpeg)
-          Fig 12: Database Entity-Relationship (ER) Diagram
+          Fig 11: Database Entity-Relationship (ER) Diagram
 
 
 ## Features
