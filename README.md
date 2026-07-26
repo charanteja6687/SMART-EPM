@@ -330,12 +330,6 @@ Interactive REST API documentation is available via Swagger UI:
 
 
 
-# Smart Employee & Project Management System - Technical & Workflow Documentation
-
-This technical reference manual provides end-to-end operational flowcharts, database initialization scripts, and Postman API testing guides for the **Smart Employee & Project Management System**.
-
----
-
 ## Technical Flowcharts & System Diagrams
 
 ### 1. Authentication & Security Flowchart
