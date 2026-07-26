@@ -332,7 +332,7 @@ Interactive REST API documentation is available via Swagger UI:
 
 ## Technical Flowcharts & System Diagrams
 
-### 1. Authentication & Security Flowchart
+### Authentication & Security Flowchart
 Visualizes the stateless JWT login lifecycle, password hashing via BCrypt, token validation filter, and Email OTP password reset flow.
 
 ```mermaid
@@ -365,7 +365,7 @@ flowchart TD
 
 ---
 
-### 2. Employee Management Flowchart
+### Employee Management Flowchart
 Illustrates the employee record creation, search/sorting, soft deletion, and restoration workflow.
 
 ```mermaid
@@ -394,7 +394,7 @@ flowchart TD
 
 ---
 
-### 3. Project Management Flowchart
+### Project Management Flowchart
 Shows project creation, Many-to-Many employee team assignment, and automatic progress percentage updates.
 
 ```mermaid
@@ -417,7 +417,7 @@ flowchart TD
 
 ---
 
-### 4. Task Management & Progress Flowchart
+### Task Management & Progress Flowchart
 Maps out task assignment to team members, employee status updates with remarks, and soft delete restoration.
 
 ```mermaid
@@ -438,7 +438,7 @@ flowchart TD
 
 ---
 
-### 5. API Request Lifecycle & Error Handling Flowchart
+### API Request Lifecycle & Error Handling Flowchart
 Demonstrates incoming REST API request validation, JWT header filter checks, service layer processing, transaction boundaries, and global exception handling.
 
 ```mermaid
@@ -466,7 +466,7 @@ flowchart TD
 
 ---
 
-### 6. Database Persistence & Event Flowchart
+### Database Persistence & Event Flowchart
 Visualizes data interaction between Hibernate JPA, MySQL relational tables, audit trail triggers, and notification records.
 
 ```mermaid
@@ -691,4 +691,7 @@ Authorization: Bearer {{token}}
 
 
 ---
+📄 License
+This project is open source and available under the MIT License.
 
+Made with ☕ and clean architecture
